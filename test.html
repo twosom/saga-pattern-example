@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h2>주문</h2>
+<div>
+    <label for="username">주문자 이름</label>
+    <input type="text" id="username">
+</div>
+
+<div>
+    <label for="address">주소</label>
+    <input type="text" id="address">
+</div>
+
+<span>가격 : 40,000</span>
+<button type="button" onclick="processOrder()">주문하기</button>
+
+
+</body>
+
+<script>
+    async function processOrder() {
+        let username = document.querySelector('#username').value;
+        let address = document.querySelector('#address').value;
+        if (username.length === 0 || address.length === 0) {
+            alert('필수값을 입력하세요.');
+            return;
+        }
+
+        //TODO 주문 로직
+        let response = await fetch('http://localhost:8080/api/order', {
+            method: 'POST',
+            body: JSON.stringify({username, address}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+    }
+</script>
+</html>
